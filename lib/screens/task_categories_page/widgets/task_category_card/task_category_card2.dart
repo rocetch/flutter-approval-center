@@ -1,7 +1,8 @@
 import 'package:approval_center/models/task_category.dart';
 import 'package:flutter/material.dart';
 
-class TaskCategoryCard {
+class TaskCategoryCard2 {
+  /*
   TaskCategoryCard(this.context, this.index, this._taskCategory);
 
   final TaskCategory _taskCategory;
@@ -70,4 +71,5 @@ class TaskCategoryCard {
       ],
     ),
   );
+  */
 }

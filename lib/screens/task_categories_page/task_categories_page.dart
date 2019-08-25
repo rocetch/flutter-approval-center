@@ -4,7 +4,7 @@ import 'package:approval_center/models/task_category.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/task_category_card/task_category_card.dart';
-import 'widgets/top_bar/top_bar.dart';
+//import 'widgets/top_bar/top_bar.dart';
 
 class TaskCategoriesPage extends StatefulWidget {
   TaskCategoriesPage({Key key, this.title}) : super(key: key);
@@ -25,10 +25,23 @@ class TaskCategoriesPage extends StatefulWidget {
 }
 
 class _TaskCategoriesPageState extends State<TaskCategoriesPage> {
-  int _counter = 0;
+  //int _counter = 0;
   List<TaskCategory> categories = initData();
   
-  //final List<int> colorCodes = <int>[600, 500, 100, 600, 500, 100, 600, 500, 100, 600, 500, 100, 600, 500, 100];
+  void _refresh() {
+    setState(() {
+      categories = initData();
+      //_counter++;
+      //categories.clear();
+      //categories.addAll(initData());
+      // for (var i=0; i<20; i++) {
+      //   var totalCnt = Random().nextInt(10);
+      //   var unreadCnt = Random().nextInt(totalCnt);
+      //   var catg = TaskCategory("Category $i", totalCnt, unreadCnt);
+      //   categories[i] = catg;
+      // }
+    });
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -37,21 +50,25 @@ class _TaskCategoriesPageState extends State<TaskCategoriesPage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      //_counter++;
     });
   }
 
   static List<TaskCategory> initData() {
     List<TaskCategory> _categories = <TaskCategory>[];
     for (var i=0; i<20; i++) {
-      _categories.add(TaskCategory("test $i", "descriptiondescription\ntest", Random().nextBool()));
+      var totalCnt = Random().nextInt(10)+1;
+      var unreadCnt = Random().nextInt(totalCnt);
+      var catg = TaskCategory("Category $i", totalCnt, unreadCnt);
+      //print(i.toString() + catg.unread.toString());
+      _categories.add(catg);
     }
     return _categories;
   }
 
   @override
   Widget build(BuildContext context) {
-  //initData();
+    //print("build");
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -59,7 +76,7 @@ class _TaskCategoriesPageState extends State<TaskCategoriesPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: TopBar(widget.title).build(),
+      appBar: buildAppBar(),
       body: ListView.builder(
         physics: BouncingScrollPhysics(),
         padding: const EdgeInsets.all(0.0),
@@ -118,11 +135,40 @@ class _TaskCategoriesPageState extends State<TaskCategoriesPage> {
         ),
       ),
       */
+      /*
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      */
     );
+  }
+
+  Widget buildAppBar() {
+    return AppBar(
+      title: Text(widget.title),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.refresh),
+          onPressed: _onRefreshPressed,
+        ),
+        IconButton(
+          icon: Icon(Icons.more_vert),
+          onPressed: _onMorePressed,
+        ),
+      ],
+      toolbarOpacity: 1,
+      bottomOpacity: 0.1,
+      //backgroundColor: Color.fromRGBO(0, 0, 255, 0.1),
+    );
+  }
+
+  void _onMorePressed() {
+
+  }
+
+  void _onRefreshPressed() {
+    _refresh();
   }
 }

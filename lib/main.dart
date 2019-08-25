@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'screens/task_category_list/task_categories_page.dart';
+import 'screens/task_categories_page/task_categories_page.dart';
+import 'screens/tasks_page/tasks_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
       ),
       home: TaskCategoriesPage(title: 'Approval Center'),
+      routes: <String, WidgetBuilder>{
+        TasksPage.routeName: (BuildContext context) => TasksPage(),
+      },
     );
   }
 }
